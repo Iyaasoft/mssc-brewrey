@@ -11,7 +11,7 @@
 	<groupId>guru.springframework</groupId>
 	<artifactId>mssc-brewrey</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mssc-brewrey</name>
+	<name>mssc-brewery</name>
 	<description>SFG Brewrey</description>
 	<properties>
 		<java.version>11</java.version>

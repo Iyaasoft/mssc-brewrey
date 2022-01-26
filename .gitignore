@@ -35,7 +35,7 @@ Latest commit 077f8f2 on 20 Apr 2019
 /build/www/**
 /src/test/javascript/coverage/
 /src/test/javascript/PhantomJS*/
-target/**
+target/*
 ######################
 # Node
 ######################
