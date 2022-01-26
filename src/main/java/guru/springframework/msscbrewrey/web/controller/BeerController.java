@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RequestMapping("/api/v1/beer")
@@ -24,7 +26,7 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity handlePost(@RequestBody BeerDto beerDto) {
+    public ResponseEntity handlePost(@Valid @RequestBody BeerDto beerDto) throws ConstraintViolationException{
         BeerDto dto = beerService.createBeer(beerDto);
         // create a new bear
         HttpHeaders headers = new HttpHeaders();
@@ -34,7 +36,7 @@ public class BeerController {
 
     @PutMapping({"/{beerId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void handlePut(@PathVariable("beerId")  UUID beerId, @RequestBody BeerDto beerDto) {
+    public void handlePut(@PathVariable("beerId")  UUID beerId, @Valid @RequestBody BeerDto beerDto) throws ConstraintViolationException {
         beerService.updateBeer(beerId, beerDto);
     }
 
