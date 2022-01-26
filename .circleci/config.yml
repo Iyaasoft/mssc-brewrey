@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: circleci/openjdk:stretch
         auth:
-          username: mydockerhub-user
+          username: abuayyub
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
@@ -15,7 +15,7 @@ jobs:
     docker:
       - image: circleci/openjdk:stretch
         auth:
-          username: mydockerhub-user
+          username: abuayyub
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
