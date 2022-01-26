@@ -22,8 +22,8 @@ public class BeerDto {
     private UUID id;
     @NotBlank
     private String beerName;
-    @NotBlank
-    private String beerStyle;
+    @NotNull
+    private BearStyleEnum beerStyle;
     @Positive
     @NotNull
     private long upc;

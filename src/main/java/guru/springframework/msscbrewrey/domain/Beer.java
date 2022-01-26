@@ -9,6 +9,7 @@ import org.hibernate.annotations.*;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -30,9 +31,9 @@ public class Beer {
 
     @CreationTimestamp
     @Column(updatable = false)
-    private OffsetDateTime createdDate;
+    private Timestamp createdDate;
     @UpdateTimestamp
-    private OffsetDateTime lastModifiedDate;
+    private Timestamp lastModifiedDate;
     private String beerName;
     private String beerStyle;
     @Column(unique = true)

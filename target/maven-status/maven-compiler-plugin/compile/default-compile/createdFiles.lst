@@ -1,3 +1,4 @@
+guru/springframework/msscbrewrey/web/mapper/BeerMapperImpl.class
 guru/springframework/msscbrewrey/MsscBrewreyApplication.class
 guru/springframework/msscbrewrey/web/model/CustomerDto$CustomerDtoBuilder.class
 guru/springframework/msscbrewrey/domain/Beer$BeerBuilder.class
@@ -8,9 +9,15 @@ guru/springframework/msscbrewrey/services/BeerService.class
 guru/springframework/msscbrewrey/services/CustomerService.class
 guru/springframework/msscbrewrey/web/model/BeerDto.class
 guru/springframework/msscbrewrey/web/model/BeerDto$BeerDtoBuilder.class
+guru/springframework/msscbrewrey/domain/Customer$CustomerBuilder.class
+guru/springframework/msscbrewrey/web/mapper/CustomerMapper.class
 guru/springframework/msscbrewrey/web/controller/CustomerController.class
+guru/springframework/msscbrewrey/web/mapper/CustomerMapperImpl.class
+guru/springframework/msscbrewrey/domain/Customer.class
+guru/springframework/msscbrewrey/web/mapper/DateMapper.class
 guru/springframework/msscbrewrey/web/model/CustomerDto.class
 guru/springframework/msscbrewrey/domain/Beer.class
 guru/springframework/msscbrewrey/bootstrap/BeerDbDataInitializer.class
+guru/springframework/msscbrewrey/web/mapper/BeerMapper.class
 guru/springframework/msscbrewrey/web/controller/BeerController.class
 guru/springframework/msscbrewrey/services/CustomerServiceImpl.class

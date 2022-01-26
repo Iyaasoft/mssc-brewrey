@@ -3,8 +3,12 @@
 /Users/to20291063/git/spring-framework-guru/mssc-brewrey/src/main/java/guru/springframework/msscbrewrey/services/BeerServiceImpl.java
 /Users/to20291063/git/spring-framework-guru/mssc-brewrey/src/main/java/guru/springframework/msscbrewrey/services/CustomerServiceImpl.java
 /Users/to20291063/git/spring-framework-guru/mssc-brewrey/src/main/java/guru/springframework/msscbrewrey/services/CustomerService.java
+/Users/to20291063/git/spring-framework-guru/mssc-brewrey/src/main/java/guru/springframework/msscbrewrey/web/mapper/CustomerMapper.java
+/Users/to20291063/git/spring-framework-guru/mssc-brewrey/src/main/java/guru/springframework/msscbrewrey/domain/Customer.java
 /Users/to20291063/git/spring-framework-guru/mssc-brewrey/src/main/java/guru/springframework/msscbrewrey/web/model/CustomerDto.java
 /Users/to20291063/git/spring-framework-guru/mssc-brewrey/src/main/java/guru/springframework/msscbrewrey/services/BeerService.java
+/Users/to20291063/git/spring-framework-guru/mssc-brewrey/src/main/java/guru/springframework/msscbrewrey/web/mapper/BeerMapper.java
+/Users/to20291063/git/spring-framework-guru/mssc-brewrey/src/main/java/guru/springframework/msscbrewrey/web/mapper/DateMapper.java
 /Users/to20291063/git/spring-framework-guru/mssc-brewrey/src/main/java/guru/springframework/msscbrewrey/bootstrap/BeerDbDataInitializer.java
 /Users/to20291063/git/spring-framework-guru/mssc-brewrey/src/main/java/guru/springframework/msscbrewrey/repository/BeerRepository.java
 /Users/to20291063/git/spring-framework-guru/mssc-brewrey/src/main/java/guru/springframework/msscbrewrey/web/controller/BeerController.java

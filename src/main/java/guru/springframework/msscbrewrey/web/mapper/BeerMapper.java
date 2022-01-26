@@ -1,2 +1,12 @@
-package guru.springframework.msscbrewrey.web.mapper;public class BeerMapper {
+package guru.springframework.msscbrewrey.web.mapper;
+
+import guru.springframework.msscbrewrey.domain.Beer;
+import guru.springframework.msscbrewrey.web.model.BeerDto;
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel = "spring", uses={DateMapper.class})
+public interface BeerMapper {
+
+    BeerDto beerToBeerDto(Beer beer);
+    Beer beerDtoToBeer(BeerDto beerDto);
 }

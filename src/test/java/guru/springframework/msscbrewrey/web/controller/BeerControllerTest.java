@@ -2,8 +2,11 @@ package guru.springframework.msscbrewrey.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.springframework.msscbrewrey.services.BeerService;
+import guru.springframework.msscbrewrey.web.model.BearStyleEnum;
 import guru.springframework.msscbrewrey.web.model.BeerDto;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -44,7 +47,7 @@ class BeerControllerTest {
     void handlePost() throws Exception {
         BeerDto dto = BeerDto.builder()
                 .beerName("Heiniken")
-                .beerStyle("Larger")
+                .beerStyle(BearStyleEnum.Larger)
                 .price(new BigDecimal(2.50))
                 .upc(1220L).build();
 
@@ -86,7 +89,7 @@ class BeerControllerTest {
 
         BeerDto dto = BeerDto.builder()
                 .beerName("Heiniken")
-                .beerStyle("Larger")
+                .beerStyle(BearStyleEnum.Larger)
                 .price(new BigDecimal(2.50))
                 .upc(1220L).build();
 
