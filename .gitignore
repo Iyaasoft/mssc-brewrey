@@ -36,6 +36,10 @@ Latest commit 077f8f2 on 20 Apr 2019
 /src/test/javascript/coverage/
 /src/test/javascript/PhantomJS*/
 target/*
+target/maven-status/*
+target/maven-status/maven-compiler-plugin/*
+target/maven-status/maven-compiler-plugin/compile/*
+
 ######################
 # Node
 ######################
