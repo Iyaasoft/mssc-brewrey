@@ -1,6 +1,7 @@
 package guru.springframework.msscbrewrey.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import guru.springframework.msscbrewrey.AbstractBeerBaseTest;
 import guru.springframework.msscbrewrey.services.CustomerService;
 import guru.springframework.msscbrewrey.web.model.CustomerDto;
 import org.junit.jupiter.api.Test;
@@ -21,16 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(CustomerController.class)
-class CustomerControllerTest {
-
-    @Autowired
-    MockMvc mvc;
-
-    @MockBean
-    CustomerService customerService;
-
-    @Autowired
-    ObjectMapper mapper;
+class CustomerControllerTest extends AbstractBeerBaseTest {
 
     @Test
     void doGet() throws Exception {
@@ -43,9 +35,7 @@ class CustomerControllerTest {
 
     @Test
     void handlePost() throws Exception {
-        CustomerDto dto = CustomerDto.builder()
-                .name("James Brown II")
-                .build();
+        CustomerDto dto = getCustomer();
         String json = mapper.writeValueAsString(dto);
         UUID uuid = UUID.randomUUID();
         when(customerService.createCustomer(any())).thenReturn(dto);
@@ -60,9 +50,7 @@ class CustomerControllerTest {
 
     @Test
     void handlePut() throws Exception {
-        CustomerDto dto = CustomerDto.builder()
-                .name("James Brown II")
-                .build();
+        CustomerDto dto = getCustomer();
         String json = mapper.writeValueAsString(dto);
         UUID uuid = UUID.randomUUID();
         doNothing().when(customerService).updateCustomer(any());
@@ -83,9 +71,8 @@ class CustomerControllerTest {
 
     @Test
     void expectBadRequestForConstraintViolationExceptionWithBlankName() throws Exception {
-        CustomerDto dto = CustomerDto.builder()
-                .name(" ")
-                .build();
+        CustomerDto dto = getCustomer();
+        dto.setName(" ");
         String json = mapper.writeValueAsString(dto);
         UUID uuid = UUID.randomUUID();
         doNothing().when(customerService).updateCustomer(any());

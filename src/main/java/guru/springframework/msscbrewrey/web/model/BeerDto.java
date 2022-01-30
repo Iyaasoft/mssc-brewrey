@@ -25,9 +25,8 @@ public class BeerDto {
     private String beerName;
     @NotNull
     private BearStyleEnum beerStyle;
-    @Positive
     @NotNull
-    private long upc;
+    private String upc;
     @Null
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "\"yyyy-MM-dd'T'HH:mm:ssZ\"")
     private OffsetDateTime createdDate;

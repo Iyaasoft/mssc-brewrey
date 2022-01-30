@@ -34,5 +34,11 @@ public class BreweryExceptionHandler {
         return new ResponseEntity(ex.getAllErrors(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(BeerNotFoundException.class)
+    public @ResponseBody ResponseEntity<List>  handleBeerNotFoundException(
+            BeerNotFoundException ex) {
+        return new ResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
 }
 

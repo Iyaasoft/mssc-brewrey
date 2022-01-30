@@ -27,17 +27,13 @@ public class BeerController {
 
     @PostMapping
     public ResponseEntity handlePost(@Valid @RequestBody BeerDto beerDto) throws ConstraintViolationException{
-        BeerDto dto = beerService.createBeer(beerDto);
-        // create a new bear
-        val headers = new HttpHeaders();
-        headers.add("Location", "/api/vi/beer/"+dto.getId().toString());
-        return new ResponseEntity(headers, HttpStatus.CREATED);
+        return new ResponseEntity(beerService.createBeer(beerDto), HttpStatus.CREATED);
     }
 
     @PutMapping({"/{beerId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void handlePut(@PathVariable("beerId")  UUID beerId, @Valid @RequestBody BeerDto beerDto) throws ConstraintViolationException {
-        beerService.updateBeer(beerId, beerDto);
+    public ResponseEntity handlePut(@PathVariable("beerId")  UUID beerId, @Valid @RequestBody BeerDto beerDto) throws ConstraintViolationException {
+        return new ResponseEntity(beerService.updateBeer(beerId, beerDto),HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping({"/{beerId}"})

@@ -1,6 +1,8 @@
 package guru.springframework.msscbrewrey.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import guru.springframework.msscbrewrey.AbstractBeerBaseTest;
+import guru.springframework.msscbrewrey.bootstrap.BeerDbDataInitializer;
 import guru.springframework.msscbrewrey.services.BeerService;
 import guru.springframework.msscbrewrey.web.mapper.BeerMapper;
 import guru.springframework.msscbrewrey.web.mapper.DateMapper;
@@ -27,6 +29,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -43,25 +46,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(RestDocumentationExtension.class)
 @AutoConfigureRestDocs(uriScheme = "https", uriHost = "com.iyaasoft", uriPort = 80)
 @WebMvcTest({BeerController.class, BeerMapper.class, DateMapper.class})
-class BeerControllerTest {
-
-    @Autowired
-    MockMvc mvc;
-
-    @MockBean
-    BeerService beerService;
-
-    @Autowired
-    ObjectMapper mapper;
+class BeerControllerTest extends AbstractBeerBaseTest {
 
     @Test
     void doGet() throws Exception {
         UUID uuid = UUID.randomUUID();
-        when(beerService.getBeerById(any())).thenReturn(BeerDto.builder()
-                .beerName("Heiniken")
-                .beerStyle(BearStyleEnum.IPA)
-                .upc(2876193L)
-                .id(uuid).build());
+        when(beerService.getBeerById(any())).thenReturn(getBeerDto());
 
         ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
 
@@ -103,7 +93,8 @@ class BeerControllerTest {
                         .content(json)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()).andExpect(status().isCreated())
-                .andExpect(header().exists("Location"))
+                .andExpect(jsonPath("$.beerName",is("Heiniken") ))
+                .andExpect(jsonPath("$.beerStyle",is("Larger") ))
                 .andDo(document("v1/beer-post",
                         requestFields(
                                 fields.withPath("id").ignored()
@@ -115,18 +106,27 @@ class BeerControllerTest {
                                 , fields.withPath("version").ignored()
                                 , fields.withPath("price").description("Cost of the beer to the public")
                                 , fields.withPath("quantityOnHand").description("Amount of beer in stock")
-                                , fields.withPath("minOnHand").description("Minimum amount stock level for beer ")),
-                        responseHeaders(headerWithName("Location").description("Unique identifier of beer just created"))
-                                ));
+                                , fields.withPath("minOnHand").description("Minimum amount stock level for beer ")
+
+                                )
+                        , responseFields(
+                                fields.withPath("id").description("Unique identifier of Beer")
+                                , fields.withPath("upc").description("The unique upc of the beer")
+                                , fields.withPath("beerStyle").description("The type of the beer")
+                                , fields.withPath("beerName").description("The name of the beer")
+                                , fields.withPath("createdDate").ignored()
+                                , fields.withPath("lastModifiedDate").ignored()
+                                , fields.withPath("version").ignored()
+                                , fields.withPath("price").description("Cost of the beer to the public")
+                                , fields.withPath("quantityOnHand").description("Amount of beer in stock")
+                                , fields.withPath("minOnHand").description("Minimum amount stock level for beer ")
+                            )));
     }
 
     @Test
     void handlePostConstraintViolation() throws Exception {
-        BeerDto dto = BeerDto.builder()
-                .beerName("Heiniken")
-                .price(new BigDecimal(2.50))
-                .upc(1220L).build();
-
+        BeerDto dto = getBeerDto();
+        dto.setPrice(null);
         String json = mapper.writeValueAsString(dto);
         this.mvc.perform(org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post("/api/v1/beer")
                         .content(json)
@@ -143,7 +143,7 @@ class BeerControllerTest {
 
         String json = mapper.writeValueAsString(dto);
 
-        doNothing().when(beerService).updateBeer(any(UUID.class), any());
+        when(beerService.updateBeer(any(UUID.class), any())).thenReturn(dto);
 
         ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
 
@@ -167,15 +167,6 @@ class BeerControllerTest {
                         )));
     }
 
-    private BeerDto getBeerDto() {
-        return BeerDto.builder()
-                .beerName("Heiniken")
-                .beerStyle(BearStyleEnum.Larger)
-                .price(new BigDecimal(2.50))
-                .upc(1220L)
-                .minOnHand(36)
-                .quantityOnHand(230).build();
-    }
 
     @Test
     void doDelete() throws Exception {

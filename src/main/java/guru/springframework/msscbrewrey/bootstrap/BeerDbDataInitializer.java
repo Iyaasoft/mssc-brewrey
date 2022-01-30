@@ -17,6 +17,10 @@ public class BeerDbDataInitializer implements CommandLineRunner {
 
     private final BeerRepository beerRepository;
 
+    public static String BEER_1_UPC = "01254398761";
+    public static String BEER_2_UPC = "01254398762";
+    public static String BEER_3_UPC = "01254398763";
+
     public BeerDbDataInitializer(BeerRepository beerRepository) {
         this.beerRepository = beerRepository;
     }
@@ -30,9 +34,9 @@ public class BeerDbDataInitializer implements CommandLineRunner {
         if( beerRepository.count() == 0) {
             Random rd = new Random(); // creating Random object
             System.out.println();
-            beerRepository.save(Beer.builder().beerName("Heiniken").beerStyle("Larger").upc(Math.abs(rd.nextLong())).price(new BigDecimal(2.50)).quantityOnHand(240).build());
-            beerRepository.save(Beer.builder().beerName("Guiness").beerStyle("Dark Stout").upc(Math.abs(rd.nextLong())).price(new BigDecimal(3.00)).quantityOnHand(200).build());
-            beerRepository.save(Beer.builder().beerName("Stella Artoi").beerStyle("Larger").upc(Math.abs(rd.nextLong())).price(new BigDecimal(2.00)).quantityOnHand(150).build());
+            beerRepository.save(Beer.builder().beerName("Heiniken").beerStyle("Larger").upc(BEER_1_UPC ).price(new BigDecimal(2.50)).quantityOnHand(240).build());
+            beerRepository.save(Beer.builder().beerName("Guiness").beerStyle("Dark Stout").upc(BEER_2_UPC ).price(new BigDecimal(3.00)).quantityOnHand(200).build());
+            beerRepository.save(Beer.builder().beerName("Stella Artoi").beerStyle("Larger").upc(BEER_3_UPC ).price(new BigDecimal(2.00)).quantityOnHand(150).build());
         }
         log.info("Bear objects in repo : "+ beerRepository.count());
     }
