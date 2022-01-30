@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.Random;
 
 @Slf4j
-@Component
+// @Component
 public class BeerDbDataInitializer implements CommandLineRunner {
 
     private final BeerRepository beerRepository;
