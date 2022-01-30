@@ -1,5 +1,6 @@
 package guru.springframework.msscbrewrey.web.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -28,11 +29,15 @@ public class BeerDto {
     @NotNull
     private long upc;
     @Null
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "\"yyyy-MM-dd'T'HH:mm:ssZ\"")
     private OffsetDateTime createdDate;
     @Null
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "\"yyyy-MM-dd'T'HH:mm:ssZ\"")
     private OffsetDateTime lastModifiedDate;
     @Null
     private Integer version;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     @Positive
     @NotNull
     private BigDecimal price;

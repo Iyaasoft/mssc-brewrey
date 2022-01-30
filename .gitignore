@@ -35,13 +35,8 @@ Latest commit 077f8f2 on 20 Apr 2019
 /build/www/**
 /src/test/javascript/coverage/
 /src/test/javascript/PhantomJS*/
-target/*
-target/maven-status/*
-target/maven-status/maven-compiler-plugin/*
-target/maven-status/maven-compiler-plugin/compile/*
 
 ######################
-# Node
 ######################
 /node/
 node_tmp/
@@ -103,7 +98,8 @@ local.properties
 # Maven
 ######################
 /log/
-*/target/**
+target/**
+
 ######################
 # Gradle
 ######################
