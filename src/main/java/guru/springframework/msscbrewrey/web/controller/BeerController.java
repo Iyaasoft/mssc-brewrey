@@ -2,9 +2,10 @@ package guru.springframework.msscbrewrey.web.controller;
 
 import guru.springframework.msscbrewrey.services.BeerService;
 import guru.springframework.msscbrewrey.web.model.BeerDto;
+import guru.springframework.msscbrewrey.web.model.BeerPageList;
+import guru.springframework.msscbrewrey.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
-import org.springframework.http.HttpHeaders;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +21,20 @@ public class BeerController {
 
     private final BeerService beerService;
 
+    @GetMapping({"/"})
+    public ResponseEntity<BeerPageList> doGetList(@RequestParam("pageNumber") Integer pageNumber,
+                                                 @RequestParam("pageSize") Integer pageSize,
+                                                 @RequestParam(value = "beerName", required = false) String beerName,
+                                                 @RequestParam(value ="beerStyle", required = false) BeerStyleEnum beerStyle,
+                                                 @RequestParam(value = "showAllInventoryOnHand", required = false) boolean showAllInventoryOnHand){
+
+        return new ResponseEntity(beerService.getBeerList(beerName, beerStyle, PageRequest.of(pageNumber, pageSize ), showAllInventoryOnHand),HttpStatus.OK);
+    }
+
     @GetMapping({"/{beerId}"})
-    public ResponseEntity<BeerDto> doGet(@PathVariable("beerId") UUID beerId) {
-        return new ResponseEntity(beerService.getBeerById(beerId), HttpStatus.OK);
+    public ResponseEntity<BeerDto> doGet(@PathVariable("beerId") UUID beerId,
+                                         @RequestParam(value = "showAllInventoryOnHand") boolean showAllInventoryOnHand) {
+        return new ResponseEntity(beerService.getBeerById(beerId, showAllInventoryOnHand), HttpStatus.OK);
     }
 
     @PostMapping

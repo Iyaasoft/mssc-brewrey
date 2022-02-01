@@ -1,39 +1,30 @@
 package guru.springframework.msscbrewrey.web.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.springframework.msscbrewrey.AbstractBeerBaseTest;
-import guru.springframework.msscbrewrey.bootstrap.BeerDbDataInitializer;
-import guru.springframework.msscbrewrey.services.BeerService;
+import guru.springframework.msscbrewrey.services.inventory.InventoryServiceRestClient;
 import guru.springframework.msscbrewrey.web.mapper.BeerMapper;
 import guru.springframework.msscbrewrey.web.mapper.DateMapper;
-import guru.springframework.msscbrewrey.web.model.BearStyleEnum;
 import guru.springframework.msscbrewrey.web.model.BeerDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.payload.FieldDescriptor;
-import org.springframework.restdocs.snippet.Snippet;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StringUtils;
 
-import java.io.FileDescriptor;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
-import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
@@ -45,13 +36,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // import static org.springframework.restdocs.mockmvc.RestDocumentationResultHandler.*;
 @ExtendWith(RestDocumentationExtension.class)
 @AutoConfigureRestDocs(uriScheme = "https", uriHost = "com.iyaasoft", uriPort = 80)
-@WebMvcTest({BeerController.class, BeerMapper.class, DateMapper.class})
+@WebMvcTest({BeerController.class, BeerMapper.class, DateMapper.class, InventoryServiceRestClient.class})
 class BeerControllerTest extends AbstractBeerBaseTest {
+
+    @MockBean
+    private RestTemplateBuilder restTemplateBuilder;
 
     @Test
     void doGet() throws Exception {
         UUID uuid = UUID.randomUUID();
-        when(beerService.getBeerById(any())).thenReturn(getBeerDto());
+        when(beerService.getBeerById(any(),anyBoolean())).thenReturn(getBeerDto());
 
         ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.springframework.msscbrewrey.bootstrap.BeerDbDataInitializer;
 import guru.springframework.msscbrewrey.services.BeerService;
 import guru.springframework.msscbrewrey.services.CustomerService;
-import guru.springframework.msscbrewrey.web.model.BearStyleEnum;
+import guru.springframework.msscbrewrey.web.model.BeerStyleEnum;
 import guru.springframework.msscbrewrey.web.model.BeerDto;
 import guru.springframework.msscbrewrey.web.model.CustomerDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class AbstractBeerBaseTest {
     protected BeerDto getBeerDto() {
         return BeerDto.builder()
                 .beerName("Heiniken")
-                .beerStyle(BearStyleEnum.Larger)
+                .beerStyle(BeerStyleEnum.Larger)
                 .price(new BigDecimal(2.50))
                 .upc(BeerDbDataInitializer.BEER_1_UPC)
                 .minOnHand(36)

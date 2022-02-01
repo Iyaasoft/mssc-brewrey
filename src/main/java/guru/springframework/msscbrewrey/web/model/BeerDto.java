@@ -2,9 +2,7 @@ package guru.springframework.msscbrewrey.web.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
@@ -24,7 +22,7 @@ public class BeerDto {
     @NotBlank
     private String beerName;
     @NotNull
-    private BearStyleEnum beerStyle;
+    private BeerStyleEnum beerStyle;
     @NotNull
     private String upc;
     @Null

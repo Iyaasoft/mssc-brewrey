@@ -4,22 +4,29 @@ import guru.springframework.msscbrewrey.domain.Beer;
 import guru.springframework.msscbrewrey.exception.BeerNotFoundException;
 import guru.springframework.msscbrewrey.repository.BeerRepository;
 import guru.springframework.msscbrewrey.web.mapper.BeerMapper;
+import guru.springframework.msscbrewrey.web.mapper.BeerMapperDecorator;
 import guru.springframework.msscbrewrey.web.model.BeerDto;
+import guru.springframework.msscbrewrey.web.model.BeerPageList;
+import guru.springframework.msscbrewrey.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class BeerServiceImpl implements BeerService {
 
-    private final BeerMapper beerMapper;
-    private final BeerRepository beerRepository;
+    private  final BeerMapper beerMapper;
+    private  final BeerRepository beerRepository;
 
     @Override
-    public BeerDto getBeerById(UUID beerId) {
+    public BeerDto getBeerById(UUID beerId, boolean showInventoryOnHand) {
+        ((BeerMapperDecorator)beerMapper).setShowBeerInventoryOnHand(showInventoryOnHand);
             return beerMapper.beerToBeerDto(beerRepository.findById(beerId).orElseThrow(() -> new BeerNotFoundException()));
     }
 
@@ -49,5 +56,36 @@ public class BeerServiceImpl implements BeerService {
     @Override
     public void deleteBeer(UUID beerId) {
         beerRepository.deleteById(beerId);
+    }
+
+    @Override
+    public BeerPageList getBeerList(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, boolean showInventoryOnHand) {
+        BeerPageList pageList= null;
+        Page<Beer> page = null;
+
+
+        if(Objects.nonNull(beerStyle) && StringUtils.isNoneEmpty(beerName)) {
+            page = beerRepository.findByBeerNameAndBeerStyle(pageRequest,beerName,beerStyle.toString());
+        }
+        else if(Objects.nonNull(beerName) && StringUtils.isNoneEmpty(beerName)){
+            page = beerRepository.findByBeerName(pageRequest,beerName);
+        }
+        else if(Objects.nonNull(beerName) && StringUtils.isEmpty(beerName) && Objects.isNull(beerStyle)) {
+            page = beerRepository.findByBeerStyle(pageRequest,beerName);
+        } else {
+           page = beerRepository.findAll(pageRequest);
+        }
+        List<Beer> beers = (List<Beer>) beerRepository.findAll();
+        ((BeerMapperDecorator)beerMapper).setShowBeerInventoryOnHand(showInventoryOnHand);
+        pageList = new BeerPageList(page
+                .getContent()
+                .stream()
+                .map(beerMapper::beerToBeerDto)
+                .collect(Collectors.toList()),
+                PageRequest.of(
+                                page.getPageable().getPageNumber(),
+                                page.getPageable().getPageSize()),
+                page.getTotalElements());
+        return pageList;
     }
 }

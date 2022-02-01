@@ -10,9 +10,10 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Random;
+import java.util.UUID;
 
 @Slf4j
-// @Component
+@Component
 public class BeerDbDataInitializer implements CommandLineRunner {
 
     private final BeerRepository beerRepository;
@@ -20,6 +21,11 @@ public class BeerDbDataInitializer implements CommandLineRunner {
     public static String BEER_1_UPC = "01254398761";
     public static String BEER_2_UPC = "01254398762";
     public static String BEER_3_UPC = "01254398763";
+
+    public static final UUID BEER_1_UUID = UUID.fromString("38c704a0-9f4f-49ce-94dd-436f13001ca7");
+    public static final UUID BEER_2_UUID = UUID.fromString("b0f2d5bc-17df-4b84-abe3-3b0913173e0f");
+    public static final UUID BEER_3_UUID = UUID.fromString("34dd0cdc-6cbe-4c04-a14d-eb424efc05d6");
+
 
     public BeerDbDataInitializer(BeerRepository beerRepository) {
         this.beerRepository = beerRepository;
@@ -34,11 +40,12 @@ public class BeerDbDataInitializer implements CommandLineRunner {
         if( beerRepository.count() == 0) {
             Random rd = new Random(); // creating Random object
             System.out.println();
-            beerRepository.save(Beer.builder().beerName("Heiniken").beerStyle("Larger").upc(BEER_1_UPC ).price(new BigDecimal(2.50)).quantityOnHand(240).build());
-            beerRepository.save(Beer.builder().beerName("Guiness").beerStyle("Dark Stout").upc(BEER_2_UPC ).price(new BigDecimal(3.00)).quantityOnHand(200).build());
-            beerRepository.save(Beer.builder().beerName("Stella Artoi").beerStyle("Larger").upc(BEER_3_UPC ).price(new BigDecimal(2.00)).quantityOnHand(150).build());
+            beerRepository.save( Beer.builder().id(BEER_1_UUID).beerName("Heiniken").beerStyle("Larger").upc(BEER_1_UPC ).price(new BigDecimal(2.50)).build());
+            beerRepository.save( Beer.builder().id(BEER_2_UUID).beerName("Guiness").beerStyle("Dark_Stout").upc(BEER_2_UPC ).price(new BigDecimal(3.00)).build());
+            beerRepository.save( Beer.builder().id(BEER_3_UUID).beerName("Stella Artoi").beerStyle("Larger").upc(BEER_3_UPC ).price(new BigDecimal(2.00)).build());
         }
         log.info("Bear objects in repo : "+ beerRepository.count());
+        beerRepository.findAll().forEach(item -> System.out.println(item.getBeerName()+" ALLBEERSFOUND "+item.getId()));
     }
 
 
