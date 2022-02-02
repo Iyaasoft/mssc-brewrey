@@ -10,6 +10,7 @@ import guru.springframework.msscbrewrey.web.model.BeerPageList;
 import guru.springframework.msscbrewrey.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,10 @@ public class BeerServiceImpl implements BeerService {
     private  final BeerMapper beerMapper;
     private  final BeerRepository beerRepository;
 
+    @Cacheable(cacheNames= {"beerCache"}, condition ="#showInventoryOnHand == false", cacheManager = "cacheManager")
     @Override
     public BeerDto getBeerById(UUID beerId, boolean showInventoryOnHand) {
+        System.out.println("Invoked repository for get beer");
         ((BeerMapperDecorator)beerMapper).setShowBeerInventoryOnHand(showInventoryOnHand);
             return beerMapper.beerToBeerDto(beerRepository.findById(beerId).orElseThrow(() -> new BeerNotFoundException()));
     }
@@ -58,11 +61,12 @@ public class BeerServiceImpl implements BeerService {
         beerRepository.deleteById(beerId);
     }
 
+    @Cacheable(cacheNames = {"beerListCache"} , condition ="#showInventoryOnHand == false", cacheManager = "cacheManager")
     @Override
     public BeerPageList getBeerList(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, boolean showInventoryOnHand) {
         BeerPageList pageList= null;
         Page<Beer> page = null;
-
+        System.out.println("Invoked repository for beer list");
 
         if(Objects.nonNull(beerStyle) && StringUtils.isNoneEmpty(beerName)) {
             page = beerRepository.findByBeerNameAndBeerStyle(pageRequest,beerName,beerStyle.toString());

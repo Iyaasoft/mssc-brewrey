@@ -1,0 +1,22 @@
+<config
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xmlns:jsr107='http://www.ehcache.org/v3/jsr107'
+        xsi:schemaLocation="
+        http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
+        http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
+
+    <!--this would not work for love nor money  so used the simple cache
+       that spring boot allows you to configure and that worked fine.
+       keeping this for information -->
+    <cache alias="beerCache" uses-template="heap-cache" />
+    <cache alias="beerListCache" uses-template="heap-cache" />
+    <cache alias="customerCache" uses-template="heap-cache" />
+    <cache-template name="heap-cache">
+        <resources>
+            <heap unit="entries">200</heap>
+            <offheap unit="MB">10</offheap>
+        </resources>
+    </cache-template>
+
+</config>
