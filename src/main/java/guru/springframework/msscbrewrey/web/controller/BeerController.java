@@ -53,4 +53,9 @@ public class BeerController {
     public void doDelete(@PathVariable("beerId") UUID beerId) {
         beerService.deleteBeer(beerId);
     }
+
+    @GetMapping("/upc/{upc}")
+    public ResponseEntity getBeerByUpc(@PathVariable("upc") Long upc,  @RequestParam(value = "showAllInventoryOnHand") boolean showAllInventoryOnHand ) {
+        return new ResponseEntity(beerService.getBeerByUpc(upc, showAllInventoryOnHand),HttpStatus.OK);
+    }
 }

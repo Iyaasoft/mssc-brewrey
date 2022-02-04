@@ -50,8 +50,8 @@ class BeerControllerTest extends AbstractBeerBaseTest {
         ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
 
         this.mvc.perform(org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders
-                        .get("/api/v1/beer/{beerId}", uuid)
-                        .param("isCold", "No"))
+                        .get("/api/v1/beer/{beerId}", uuid, false)
+                        .param("showAllInventoryOnHand", "false"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Heiniken")))
                 .andDo(document("v1/beer-get",
@@ -59,7 +59,7 @@ class BeerControllerTest extends AbstractBeerBaseTest {
                                 parameterWithName("beerId").description("Unique identifier for a beer")
                         ),
                         requestParameters(
-                                parameterWithName("isCold").description("Not Used, Is cold query parameter")
+                                parameterWithName("showAllInventoryOnHand").description("Boolean to - decorate the response with beer on hand from inventory")
                         ),
                         responseFields(fields.withPath("id").description("Unique beer identifier")
                             , fields.withPath("beerName").description("Name off beer")

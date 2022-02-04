@@ -92,4 +92,11 @@ public class BeerServiceImpl implements BeerService {
                 page.getTotalElements());
         return pageList;
     }
+
+    @Cacheable(cacheNames= {"beerCache"}, condition ="#showInventoryOnHand == false", cacheManager = "cacheManager")
+    @Override
+    public BeerDto getBeerByUpc(Long upc, boolean showAllInventoryOnHand) {
+        ((BeerMapperDecorator)beerMapper).setShowBeerInventoryOnHand(showAllInventoryOnHand);
+        return beerMapper.beerToBeerDto(beerRepository.findByUpc(upc));
+    }
 }
