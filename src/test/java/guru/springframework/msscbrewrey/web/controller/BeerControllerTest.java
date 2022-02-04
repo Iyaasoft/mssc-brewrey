@@ -74,6 +74,40 @@ class BeerControllerTest extends AbstractBeerBaseTest {
     }
 
     @Test
+    void doGetBeerByUpc() throws Exception {
+        UUID uuid = UUID.randomUUID();
+        when(beerService.getBeerByUpc(any(),anyBoolean())).thenReturn(getBeerDto());
+
+        ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
+
+        this.mvc.perform(org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders
+                        .get("/api/v1/beer/upc/{upcId}", 12345l, false)
+                        .param("showAllInventoryOnHand", "false"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("Heiniken")))
+                .andDo(document("v1/beer-get",
+                        pathParameters(
+                                parameterWithName("upcId").description("Unique product code, another unique identity for the beer for a beer")
+                        ),
+                        requestParameters(
+                                parameterWithName("showAllInventoryOnHand").description("Boolean to - decorate the response with beer on hand from inventory")
+                        ),
+                        responseFields(fields.withPath("id").description("Unique beer identifier")
+                                , fields.withPath("beerName").description("Name off beer")
+                                , fields.withPath("beerStyle").description("Type of beer")
+                                , fields.withPath("upc").description("Unique beer upc identifier")
+                                , fields.withPath("createdDate").description("Date beer created")
+                                , fields.withPath("lastModifiedDate").description("Date beer last modified")
+                                , fields.withPath("version").description("version of the beer")
+                                , fields.withPath("price").description("Cost of the beer to the public")
+                                , fields.withPath("quantityOnHand").description("Amount of beer in stock")
+                                , fields.withPath("minOnHand").description("Minimum amount stock level for beer ")
+                        )));
+    }
+
+
+
+    @Test
     void handlePost() throws Exception {
         BeerDto dto = getBeerDto();
         String json = mapper.writeValueAsString(dto);

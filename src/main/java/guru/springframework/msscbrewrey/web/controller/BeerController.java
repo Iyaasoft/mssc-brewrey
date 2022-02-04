@@ -54,8 +54,8 @@ public class BeerController {
         beerService.deleteBeer(beerId);
     }
 
-    @GetMapping("/upc/{upc}")
-    public ResponseEntity getBeerByUpc(@PathVariable("upc") Long upc,  @RequestParam(value = "showAllInventoryOnHand") boolean showAllInventoryOnHand ) {
-        return new ResponseEntity(beerService.getBeerByUpc(upc, showAllInventoryOnHand),HttpStatus.OK);
+    @GetMapping("/upc/{upcId}")
+    public ResponseEntity doGetBeerByUpc(@PathVariable("upcId") Long upcId,  @RequestParam(value = "showAllInventoryOnHand") boolean showAllInventoryOnHand ) {
+        return new ResponseEntity(beerService.getBeerByUpc(upcId, showAllInventoryOnHand),HttpStatus.OK);
     }
 }
