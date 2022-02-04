@@ -2,14 +2,11 @@ package guru.springframework.msscbrewrey.services.inventory;
 
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextClosedEvent;
-import org.springframework.stereotype.Component;
 
 @Configuration
 public class WiremockInitialiser implements ApplicationContextInitializer<ConfigurableApplicationContext> {

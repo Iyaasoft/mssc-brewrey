@@ -1,15 +1,10 @@
 package guru.springframework.msscbrewrey.web.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.springframework.msscbrewrey.AbstractBeerBaseTest;
-import guru.springframework.msscbrewrey.services.CustomerService;
 import guru.springframework.msscbrewrey.web.model.CustomerDto;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.UUID;
 
