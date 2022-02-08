@@ -77,7 +77,7 @@ class BeerControllerTest extends AbstractBeerBaseTest {
                         .param("showAllInventoryOnHand", "false"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Heiniken")))
-                .andDo(document("v1/beer-get",
+                .andDo(document("v1/beer-upc",
                         pathParameters(
                                 parameterWithName("upc").description("Unique product code, another unique identity for the beer for a beer")
                         ),

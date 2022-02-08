@@ -11,58 +11,75 @@ documentation snippets.
 
 BEER GET
 
-One showing how to make a request using cURL:
+How to make a request using cURL:
 
 include::{snippets}/v1/beer-get/curl-request.adoc[]
 
-One showing the HTTP request:
+HTTP request:
 
 include::{snippets}/v1/beer-get/http-request.adoc[]
 
-And one showing the HTTP response:
+HTTP response:
 
 include::{snippets}/v1/beer-get/http-response.adoc[]
 
 Response Body:
 include::{snippets}/v1/beer-get/response-body.adoc[]
 
+BEER GET BY UPC
+
+How to make a request using cURL:
+
+include::{snippets}/v1/beer-upc/curl-request.adoc[]
+
+HTTP request:
+
+include::{snippets}/v1/beer-upc/http-request.adoc[]
+
+HTTP response:
+
+include::{snippets}/v1/beer-upc/http-response.adoc[]
+
+Response Body:
+include::{snippets}/v1/beer-upc/response-body.adoc[]
+
 BEER CREATE
 
-One showing how to make a request using cURL:
+How to make a request using cURL:
 
 include::{snippets}/v1/beer-post/curl-request.adoc[]
 
-One showing the HTTP request:
+HTTP request:
 
 include::{snippets}/v1/beer-post/http-request.adoc[]
 
 Request Fields:
 include::{snippets}/v1/beer-post/request-fields.adoc[]
 
-And one showing the HTTP response:
+HTTP response:
 
 include::{snippets}/v1/beer-post/http-response.adoc[]
 
 BEER UPDATE
 
-One showing how to make a request using cURL:
+How to make a request using cURL:
 
 include::{snippets}/v1/beer-update/curl-request.adoc[]
 
-One showing the HTTP request:
+HTTP request:
 
 include::{snippets}/v1/beer-update/http-request.adoc[]
 
 Request Fields:
 include::{snippets}/v1/beer-update/request-fields.adoc[]
 
-And one showing the HTTP response:
+HTTP response:
 
 include::{snippets}/v1/beer-update/http-response.adoc[]
 
 BEER DELETE
 
-One showing how to make a request using cURL:
+How to make a request using cURL:
 
 include::{snippets}/v1/beer-delete/curl-request.adoc[]
 
@@ -73,3 +90,5 @@ include::{snippets}/v1/beer-delete/http-request.adoc[]
 And one showing the HTTP response:
 
 include::{snippets}/v1/beer-delete/http-response.adoc[]
+
+
