@@ -26,14 +26,14 @@ public class BeerController {
                                                  @RequestParam("pageSize") Integer pageSize,
                                                  @RequestParam(value = "beerName", required = false) String beerName,
                                                  @RequestParam(value ="beerStyle", required = false) BeerStyleEnum beerStyle,
-                                                 @RequestParam(value = "showAllInventoryOnHand", required = false) boolean showAllInventoryOnHand){
+                                                 @RequestParam(value = "showAllInventoryOnHand", required = false) Boolean showAllInventoryOnHand){
 
         return new ResponseEntity(beerService.getBeerList(beerName, beerStyle, PageRequest.of(pageNumber, pageSize ), showAllInventoryOnHand),HttpStatus.OK);
     }
 
     @GetMapping({"/{beerId}"})
     public ResponseEntity<BeerDto> doGet(@PathVariable("beerId") UUID beerId,
-                                         @RequestParam(value = "showAllInventoryOnHand") boolean showAllInventoryOnHand) {
+                                         @RequestParam(value = "showAllInventoryOnHand") Boolean showAllInventoryOnHand) {
         return new ResponseEntity(beerService.getBeerById(beerId, showAllInventoryOnHand), HttpStatus.OK);
     }
 
@@ -54,8 +54,8 @@ public class BeerController {
         beerService.deleteBeer(beerId);
     }
 
-    @GetMapping("/upc/{upcId}")
-    public ResponseEntity doGetBeerByUpc(@PathVariable("upcId") Long upcId,  @RequestParam(value = "showAllInventoryOnHand") boolean showAllInventoryOnHand ) {
+    @GetMapping("/upc/{upc}")
+    public ResponseEntity doGetBeerByUpc(@PathVariable("upc") String upcId,  @RequestParam(value = "showAllInventoryOnHand") Boolean showAllInventoryOnHand ) {
         return new ResponseEntity(beerService.getBeerByUpc(upcId, showAllInventoryOnHand),HttpStatus.OK);
     }
 }

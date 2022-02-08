@@ -1,7 +1,6 @@
 package guru.springframework.msscbrewrey.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 
 @ConfigurationProperties(prefix = "sgf.brewery", ignoreInvalidFields = true)

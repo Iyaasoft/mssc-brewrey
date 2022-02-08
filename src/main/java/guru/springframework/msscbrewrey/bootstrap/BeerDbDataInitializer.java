@@ -13,14 +13,14 @@ import java.util.Random;
 import java.util.UUID;
 
 @Slf4j
-@Component
+// @Component
 public class BeerDbDataInitializer implements CommandLineRunner {
 
     private final BeerRepository beerRepository;
 
-    public static String BEER_1_UPC = "01254398761";
-    public static String BEER_2_UPC = "01254398762";
-    public static String BEER_3_UPC = "01254398763";
+    public static final String BEER_1_UPC = "10631234200036";
+    public static final String BEER_2_UPC = "0631234300019";
+    public static final String BEER_3_UPC = "0083783375213";
 
     public static final UUID BEER_1_UUID = UUID.fromString("38c704a0-9f4f-49ce-94dd-436f13001ca7");
     public static final UUID BEER_2_UUID = UUID.fromString("b0f2d5bc-17df-4b84-abe3-3b0913173e0f");
@@ -40,7 +40,7 @@ public class BeerDbDataInitializer implements CommandLineRunner {
         if( beerRepository.count() == 0) {
             Random rd = new Random(); // creating Random object
             System.out.println();
-            beerRepository.save( Beer.builder().id(BEER_1_UUID).beerName("Heiniken").beerStyle("Larger").upc(BEER_1_UPC ).price(new BigDecimal(2.50)).build());
+            beerRepository.save( Beer.builder().id(BEER_1_UUID).beerName("Heiniken").beerStyle("Larger").upc(BEER_1_UPC).price(new BigDecimal(2.50)).build());
             beerRepository.save( Beer.builder().id(BEER_2_UUID).beerName("Guiness").beerStyle("Dark_Stout").upc(BEER_2_UPC ).price(new BigDecimal(3.00)).build());
             beerRepository.save( Beer.builder().id(BEER_3_UUID).beerName("Stella Artoi").beerStyle("Larger").upc(BEER_3_UPC ).price(new BigDecimal(2.00)).build());
         }

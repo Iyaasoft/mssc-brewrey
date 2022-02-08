@@ -15,6 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.payload.FieldDescriptor;
+import org.springframework.restdocs.payload.RequestFieldsSnippet;
+import org.springframework.restdocs.payload.ResponseFieldsSnippet;
 import org.springframework.util.StringUtils;
 
 import java.util.UUID;
@@ -60,17 +62,7 @@ class BeerControllerTest extends AbstractBeerBaseTest {
                         requestParameters(
                                 parameterWithName("showAllInventoryOnHand").description("Boolean to - decorate the response with beer on hand from inventory")
                         ),
-                        responseFields(fields.withPath("id").description("Unique beer identifier")
-                            , fields.withPath("beerName").description("Name off beer")
-                            , fields.withPath("beerStyle").description("Type of beer")
-                            , fields.withPath("upc").description("Unique beer upc identifier")
-                            , fields.withPath("createdDate").description("Date beer created")
-                            , fields.withPath("lastModifiedDate").description("Date beer last modified")
-                            , fields.withPath("version").description("version of the beer")
-                            , fields.withPath("price").description("Cost of the beer to the public")
-                            , fields.withPath("quantityOnHand").description("Amount of beer in stock")
-                            , fields.withPath("minOnHand").description("Minimum amount stock level for beer ")
-                        )));
+                        getResponseFieldsSnippet(fields)));
     }
 
     @Test
@@ -81,31 +73,19 @@ class BeerControllerTest extends AbstractBeerBaseTest {
         ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
 
         this.mvc.perform(org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders
-                        .get("/api/v1/beer/upc/{upcId}", 12345l, false)
+                        .get("/api/v1/beer/upc/{upc}", 12345l, false)
                         .param("showAllInventoryOnHand", "false"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Heiniken")))
                 .andDo(document("v1/beer-get",
                         pathParameters(
-                                parameterWithName("upcId").description("Unique product code, another unique identity for the beer for a beer")
+                                parameterWithName("upc").description("Unique product code, another unique identity for the beer for a beer")
                         ),
                         requestParameters(
                                 parameterWithName("showAllInventoryOnHand").description("Boolean to - decorate the response with beer on hand from inventory")
                         ),
-                        responseFields(fields.withPath("id").description("Unique beer identifier")
-                                , fields.withPath("beerName").description("Name off beer")
-                                , fields.withPath("beerStyle").description("Type of beer")
-                                , fields.withPath("upc").description("Unique beer upc identifier")
-                                , fields.withPath("createdDate").description("Date beer created")
-                                , fields.withPath("lastModifiedDate").description("Date beer last modified")
-                                , fields.withPath("version").description("version of the beer")
-                                , fields.withPath("price").description("Cost of the beer to the public")
-                                , fields.withPath("quantityOnHand").description("Amount of beer in stock")
-                                , fields.withPath("minOnHand").description("Minimum amount stock level for beer ")
-                        )));
+                        getResponseFieldsSnippet(fields)));
     }
-
-
 
     @Test
     void handlePost() throws Exception {
@@ -121,33 +101,10 @@ class BeerControllerTest extends AbstractBeerBaseTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print()).andExpect(status().isCreated())
                 .andExpect(jsonPath("$.beerName",is("Heiniken") ))
-                .andExpect(jsonPath("$.beerStyle",is("Larger") ))
-                .andDo(document("v1/beer-post",
-                        requestFields(
-                                fields.withPath("id").ignored()
-                                , fields.withPath("upc").description("The unique upc of the beer")
-                                , fields.withPath("beerStyle").description("The type of the beer")
-                                , fields.withPath("beerName").description("The name of the beer")
-                                , fields.withPath("createdDate").ignored()
-                                , fields.withPath("lastModifiedDate").ignored()
-                                , fields.withPath("version").ignored()
-                                , fields.withPath("price").description("Cost of the beer to the public")
-                                , fields.withPath("quantityOnHand").description("Amount of beer in stock")
-                                , fields.withPath("minOnHand").description("Minimum amount stock level for beer ")
-
-                                )
-                        , responseFields(
-                                fields.withPath("id").description("Unique identifier of Beer")
-                                , fields.withPath("upc").description("The unique upc of the beer")
-                                , fields.withPath("beerStyle").description("The type of the beer")
-                                , fields.withPath("beerName").description("The name of the beer")
-                                , fields.withPath("createdDate").ignored()
-                                , fields.withPath("lastModifiedDate").ignored()
-                                , fields.withPath("version").ignored()
-                                , fields.withPath("price").description("Cost of the beer to the public")
-                                , fields.withPath("quantityOnHand").description("Amount of beer in stock")
-                                , fields.withPath("minOnHand").description("Minimum amount stock level for beer ")
-                            )));
+                .andExpect(jsonPath("$.beerStyle",is("LARGER") ))
+                .andDo(document("v1/beer-post"
+                        ,  getRequestFieldsSnippet(fields)
+                        , getResponseFieldsSnippet(fields)));
     }
 
     @Test
@@ -161,7 +118,6 @@ class BeerControllerTest extends AbstractBeerBaseTest {
                 .andDo(print()).andExpect(status().isBadRequest());
 
     }
-
 
     @Test
     void handlePut() throws Exception {
@@ -180,18 +136,7 @@ class BeerControllerTest extends AbstractBeerBaseTest {
                 .andDo(print()).andExpect(status().isNoContent())
                 .andDo(document("v1/beer-update",
                         pathParameters(parameterWithName("beerId").description("Unique identifier of requested beer"))
-                        , requestFields(
-                                fields.withPath("id").ignored()
-                                , fields.withPath("upc").description("The unique upc of the beer")
-                                , fields.withPath("beerStyle").description("The type of the beer")
-                                , fields.withPath("beerName").description("The name of the beer")
-                                , fields.withPath("createdDate").ignored()
-                                , fields.withPath("lastModifiedDate").ignored()
-                                , fields.withPath("version").ignored()
-                                , fields.withPath("price").description("Cost of the beer to the public")
-                                , fields.withPath("quantityOnHand").description("Amount of beer in stock")
-                                , fields.withPath("minOnHand").description("Minimum amount stock level for beer ")
-                        )));
+                        , getRequestFieldsSnippet(fields)));
     }
 
 
@@ -221,4 +166,33 @@ class BeerControllerTest extends AbstractBeerBaseTest {
         }
     }
 
+    private ResponseFieldsSnippet getResponseFieldsSnippet(ConstrainedFields fields) {
+        return responseFields(fields.withPath("id").description("Unique beer identifier")
+                , fields.withPath("beerName").description("Name off beer")
+                , fields.withPath("beerStyle").description("Type of beer")
+                , fields.withPath("upc").description("Unique beer upc identifier")
+                , fields.withPath("createdDate").description("Date beer created")
+                , fields.withPath("lastModifiedDate").description("Date beer last modified")
+                , fields.withPath("version").description("version of the beer")
+                , fields.withPath("price").description("Cost of the beer to the public")
+                , fields.withPath("quantityOnHand").description("Amount of beer in stock")
+                , fields.withPath("minOnHand").description("Minimum amount stock level for beer ")
+        );
+    }
+
+    private RequestFieldsSnippet getRequestFieldsSnippet(ConstrainedFields fields) {
+        return requestFields(
+                fields.withPath("id").ignored()
+                , fields.withPath("upc").description("The unique upc of the beer")
+                , fields.withPath("beerStyle").description("The type of the beer")
+                , fields.withPath("beerName").description("The name of the beer")
+                , fields.withPath("createdDate").ignored()
+                , fields.withPath("lastModifiedDate").ignored()
+                , fields.withPath("version").ignored()
+                , fields.withPath("price").description("Cost of the beer to the public")
+                , fields.withPath("quantityOnHand").description("Amount of beer in stock")
+                , fields.withPath("minOnHand").description("Minimum amount stock level for beer ")
+
+        );
+    }
 }

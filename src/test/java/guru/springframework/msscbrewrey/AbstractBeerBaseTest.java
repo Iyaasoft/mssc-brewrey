@@ -31,7 +31,7 @@ public class AbstractBeerBaseTest {
     protected BeerDto getBeerDto() {
         return BeerDto.builder()
                 .beerName("Heiniken")
-                .beerStyle(BeerStyleEnum.Larger)
+                .beerStyle(BeerStyleEnum.LARGER)
                 .price(new BigDecimal(2.50))
                 .upc(BeerDbDataInitializer.BEER_1_UPC)
                 .minOnHand(36)

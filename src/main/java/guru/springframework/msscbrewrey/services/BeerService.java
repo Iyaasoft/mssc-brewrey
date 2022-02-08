@@ -17,5 +17,5 @@ public interface BeerService {
 
     BeerPageList getBeerList(String beerName, BeerStyleEnum beerStyle, PageRequest of, boolean showInventoryOnHand);
 
-    BeerDto getBeerByUpc(Long upc, boolean showAllInventoryOnHand);
+    BeerDto getBeerByUpc(String upc, boolean showAllInventoryOnHand);
 }
