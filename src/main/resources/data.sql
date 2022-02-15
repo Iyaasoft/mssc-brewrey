@@ -8,7 +8,7 @@
 --     "price" float,
 --     "quantityOnHand" number,
 --     "minOnHand" number
--- );
+-- ) ENGINE=InnoDB;
 --
 -- INSERT INTO BEER values('0a818933-087d-47f2-ad83-2f986ed087eb','Heiniken','Larger','01254398761','2.50',50,10) ;
 -- INSERT INTO BEER values('a712d914-61ea-4623-8bd0-32c0f6545bfd','Guiness','Dark Stout','01254398762','4.50',50,10) ;

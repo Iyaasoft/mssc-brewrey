@@ -13,7 +13,7 @@ import java.util.Random;
 import java.util.UUID;
 
 @Slf4j
-// @Component
+@Component
 public class BeerDbDataInitializer implements CommandLineRunner {
 
     private final BeerRepository beerRepository;

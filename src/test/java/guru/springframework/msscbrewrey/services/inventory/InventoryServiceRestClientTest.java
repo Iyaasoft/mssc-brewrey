@@ -7,13 +7,17 @@ import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
 import guru.springframework.msscbrewrey.BreweryWiremockParameterResolver;
 import guru.springframework.msscbrewrey.MsscBrewreyApplication;
 import guru.springframework.msscbrewrey.services.inventory.model.BeerInventoryDto;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +29,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ActiveProfiles("test")
 @ExtendWith(BreweryWiremockParameterResolver.class)
-@SpringBootTest(classes = {MsscBrewreyApplication.class})
+@SpringBootTest( webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @ContextConfiguration(initializers = {WiremockInitialiser.class})
+@TestPropertySource(properties = {"server.port=9090"})
 class InventoryServiceRestClientTest {
 
     // NOTE this error report is an intellij thing can't stop it. test runs fine and passes
