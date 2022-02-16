@@ -3,45 +3,52 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>guru.springframework</groupId>
-        <artifactId>mssc-brewery-bom</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
 <!--    <parent>-->
-<!--        <groupId>com.github.sfg-beer-works</groupId>-->
-<!--        <artifactId>sfg-brewery-bom</artifactId>-->
-<!--        <version>1.0.23</version>-->
+<!--        <groupId>guru.springframework</groupId>-->
+<!--        <artifactId>mssc-brewery-bom</artifactId>-->
+<!--        <version>1.0-SNAPSHOT</version>-->
 <!--    </parent>-->
+    <parent>
+        <groupId>com.github.sfg-beer-works</groupId>
+        <artifactId>sfg-brewery-bom</artifactId>
+        <version>1.0.23</version>
+    </parent>
     <groupId>guru.springframework</groupId>
     <artifactId>mssc-brewrey</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mssc-brewery</name>
     <description>SFG Brewrey</description>
+    <properties>
+        <spring-restdocs.version>2.0.6.RELEASE</spring-restdocs.version>
+    </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-artemis</artifactId>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 <!--        <dependency>-->
-<!--            <groupId>org.apache.commons</groupId>-->
-<!--            <artifactId>commons-lang3</artifactId>-->
-<!--            <version>3.12.0</version>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-artemis</artifactId>-->
 <!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.28</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.github.tomakehurst</groupId>-->
-<!--            <artifactId>wiremock-jre8</artifactId>-->
-<!--            <version>2.32.0</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
-
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-jre8</artifactId>
+            <version>2.32.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.restdocs</groupId>
+            <artifactId>spring-restdocs-mockmvc</artifactId>
+            <version>${spring-restdocs.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -49,6 +56,7 @@
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>2.2.2</version>
                 <executions>
                     <execution>
                         <id>generate-docs</id>
@@ -71,46 +79,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                <version>3.9.0</version>-->
-<!--                <configuration>-->
-<!--                    <source>11</source>-->
-<!--                    <target>11</target>-->
-<!--                    <compilerArgs>-->
-<!--                        <compilerArg>-->
-<!--                            -Amapstruct.defaultComponentModel=spring-->
-<!--                        </compilerArg>-->
-<!--                    </compilerArgs>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <artifactId>maven-resources-plugin</artifactId>-->
-<!--                <version>${maven.resource.plugin.version}</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>copy-resources</id>-->
-<!--                        <phase>prepare-package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>copy-resources</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <outputDirectory>-->
-<!--                                ${project.build.outputDirectory}/static/docs-->
-<!--                            </outputDirectory>-->
-<!--                            <resources>-->
-<!--                                <resource>-->
-<!--                                    <directory>-->
-<!--                                        ${project.build.directory}/generated-docs-->
-<!--                                    </directory>-->
-<!--                                </resource>-->
-<!--                            </resources>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
         </plugins>
     </build>
 

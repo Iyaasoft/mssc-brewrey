@@ -40,9 +40,9 @@ public class BeerDbDataInitializer implements CommandLineRunner {
         if( beerRepository.count() == 0) {
             Random rd = new Random(); // creating Random object
             System.out.println();
-            beerRepository.save( Beer.builder().id(BEER_1_UUID).beerName("Heiniken").beerStyle("Larger").upc(BEER_1_UPC).price(new BigDecimal(2.50)).build());
-            beerRepository.save( Beer.builder().id(BEER_2_UUID).beerName("Guiness").beerStyle("Dark_Stout").upc(BEER_2_UPC ).price(new BigDecimal(3.00)).build());
-            beerRepository.save( Beer.builder().id(BEER_3_UUID).beerName("Stella Artoi").beerStyle("Larger").upc(BEER_3_UPC ).price(new BigDecimal(2.00)).build());
+            beerRepository.save( Beer.builder().id(BEER_1_UUID).beerName("Heiniken").beerStyle("LARGER").upc(BEER_1_UPC).minOnHand(65).price(new BigDecimal(2.50)).build());
+            beerRepository.save( Beer.builder().id(BEER_2_UUID).beerName("Guiness").beerStyle("DARK_STOUT").upc(BEER_2_UPC ).minOnHand(65).price(new BigDecimal(3.00)).build());
+            beerRepository.save( Beer.builder().id(BEER_3_UUID).beerName("Stella Artoi").beerStyle("IPA").upc(BEER_3_UPC ).minOnHand(65).price(new BigDecimal(2.00)).build());
         }
         log.info("Bear objects in repo : "+ beerRepository.count());
         beerRepository.findAll().forEach(item -> System.out.println(item.getBeerName()+" ALLBEERSFOUND "+item.getId()));
