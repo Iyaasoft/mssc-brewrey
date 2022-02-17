@@ -1,7 +1,7 @@
 package guru.springframework.msscbrewrey.web.controller;
 
 import guru.springframework.msscbrewrey.AbstractBeerBaseTest;
-import guru.springframework.msscbrewrey.web.model.CustomerDto;
+import guru.springframework.web.model.CustomerDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;

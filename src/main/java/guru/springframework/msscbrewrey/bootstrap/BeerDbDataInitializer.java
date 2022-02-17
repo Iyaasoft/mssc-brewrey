@@ -13,7 +13,7 @@ import java.util.Random;
 import java.util.UUID;
 
 @Slf4j
-@Component
+// @Component
 public class BeerDbDataInitializer implements CommandLineRunner {
 
     private final BeerRepository beerRepository;
@@ -22,9 +22,9 @@ public class BeerDbDataInitializer implements CommandLineRunner {
     public static final String BEER_2_UPC = "0631234300019";
     public static final String BEER_3_UPC = "0083783375213";
 
-    public static final UUID BEER_1_UUID = UUID.fromString("38c704a0-9f4f-49ce-94dd-436f13001ca7");
-    public static final UUID BEER_2_UUID = UUID.fromString("b0f2d5bc-17df-4b84-abe3-3b0913173e0f");
-    public static final UUID BEER_3_UUID = UUID.fromString("34dd0cdc-6cbe-4c04-a14d-eb424efc05d6");
+    public static final UUID BEER_1_UUID = UUID.fromString("2d2af9b0-3e1a-46e1-8f01-d7293f3e985e");
+    public static final UUID BEER_2_UUID = UUID.fromString("857670c4-898b-418a-ac8c-519fb86fd1ad");
+    public static final UUID BEER_3_UUID = UUID.fromString("8cbcdaa1-f66a-4dbd-a98f-03b889d4cb4e");
 
 
     public BeerDbDataInitializer(BeerRepository beerRepository) {

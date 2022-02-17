@@ -1,22 +1,19 @@
 package guru.springframework.msscbrewrey.services.scheduled;
 
+import guru.springframework.events.BrewBeerEvent;
+import guru.springframework.events.NewInventoryEvent;
 import guru.springframework.msscbrewrey.config.JmsConfig;
 import guru.springframework.msscbrewrey.domain.Beer;
-import guru.springframework.msscbrewrey.events.BeerEvent;
-import guru.springframework.msscbrewrey.events.BrewBeerEvent;
-import guru.springframework.msscbrewrey.events.NewInventoryEvent;
 import guru.springframework.msscbrewrey.exception.BeerNotFoundException;
 import guru.springframework.msscbrewrey.repository.BeerRepository;
-import guru.springframework.msscbrewrey.web.model.BeerDto;
+import guru.springframework.web.model.BeerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.jms.Message;
 import javax.transaction.Transactional;
-import java.util.InvalidPropertiesFormatException;
 import java.util.Optional;
 
 @Slf4j

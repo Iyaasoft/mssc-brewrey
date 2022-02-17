@@ -4,7 +4,8 @@ import guru.springframework.msscbrewrey.AbstractBeerBaseTest;
 import guru.springframework.msscbrewrey.services.inventory.InventoryServiceRestClient;
 import guru.springframework.msscbrewrey.web.mapper.BeerMapper;
 import guru.springframework.msscbrewrey.web.mapper.DateMapper;
-import guru.springframework.msscbrewrey.web.model.BeerDto;
+import guru.springframework.web.model.BeerDto;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -92,7 +93,7 @@ class BeerControllerTest extends AbstractBeerBaseTest {
         BeerDto dto = getBeerDto();
         String json = mapper.writeValueAsString(dto);
         dto.setId(UUID.randomUUID());
-        when(beerService.createBeer(any())).thenReturn(dto);
+        when(beerService.createBeer(any(BeerDto.class))).thenReturn(dto);
 
         ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
 

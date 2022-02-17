@@ -1,6 +1,6 @@
 package guru.springframework.msscbrewrey.services;
 
-import guru.springframework.msscbrewrey.web.model.CustomerDto;
+import guru.springframework.web.model.CustomerDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;

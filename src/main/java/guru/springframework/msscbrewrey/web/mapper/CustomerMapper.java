@@ -1,7 +1,7 @@
 package guru.springframework.msscbrewrey.web.mapper;
 
 import guru.springframework.msscbrewrey.domain.Customer;
-import guru.springframework.msscbrewrey.web.model.CustomerDto;
+import guru.springframework.web.model.CustomerDto;
 import org.mapstruct.Mapper;
 
 @Mapper( componentModel = "spring", uses={DateMapper.class})

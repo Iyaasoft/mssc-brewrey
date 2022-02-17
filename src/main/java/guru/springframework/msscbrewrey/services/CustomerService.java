@@ -1,8 +1,6 @@
 package guru.springframework.msscbrewrey.services;
 
-import guru.springframework.msscbrewrey.web.model.CustomerDto;
-
-import java.util.UUID;
+import guru.springframework.web.model.CustomerDto;
 
 public interface CustomerService {
 

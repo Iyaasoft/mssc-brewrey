@@ -3,7 +3,7 @@ package guru.springframework.msscbrewrey.web.mapper;
 import guru.springframework.msscbrewrey.domain.Beer;
 import guru.springframework.msscbrewrey.services.inventory.InventoryServiceRestClient;
 import guru.springframework.msscbrewrey.services.inventory.InventoryServiceRestClientImpl;
-import guru.springframework.msscbrewrey.web.model.BeerDto;
+import guru.springframework.web.model.BeerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.client.RestTemplateBuilder;
