@@ -1,7 +1,9 @@
 package guru.springframework.msscbrewrey.events;
 
 import guru.springframework.msscbrewrey.web.model.BeerDto;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class NewInventoryEvent extends BeerEvent {
 
     private static final long serialVersionUID = 1737265622440031665L;

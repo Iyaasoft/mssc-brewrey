@@ -2,6 +2,7 @@ package guru.springframework.msscbrewrey.services.scheduled;
 
 import guru.springframework.msscbrewrey.domain.Beer;
 import guru.springframework.msscbrewrey.events.BeerEvent;
+import guru.springframework.msscbrewrey.events.BrewBeerEvent;
 import guru.springframework.msscbrewrey.repository.BeerRepository;
 import guru.springframework.msscbrewrey.services.inventory.InventoryServiceRestClient;
 import guru.springframework.msscbrewrey.web.mapper.BeerMapper;
@@ -49,7 +50,7 @@ public class BrewingServiceImpl implements BrewingService {
             Integer onHandInv =  inventoryServiceRestClient.getOnHandInventory(beer.getId());
             log.debug("Called Inventory onHand: "+onHandInv);
             if(dto.getMinOnHand() == null || dto.getMinOnHand() >= onHandInv) {
-                jmsTemplate.convertAndSend(BREWING_REQUEST_Q,new BeerEvent(dto));
+                jmsTemplate.convertAndSend(BREWING_REQUEST_Q,new BrewBeerEvent(dto));
             }
 
         });
