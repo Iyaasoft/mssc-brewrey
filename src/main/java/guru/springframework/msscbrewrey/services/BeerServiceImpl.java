@@ -5,8 +5,8 @@ import guru.springframework.msscbrewrey.exception.BeerNotFoundException;
 import guru.springframework.msscbrewrey.repository.BeerRepository;
 import guru.springframework.msscbrewrey.web.mapper.BeerMapper;
 import guru.springframework.msscbrewrey.web.mapper.BeerMapperDecorator;
-import guru.springframework.msscbrewrey.web.model.BeerPageList;
 import guru.springframework.web.model.BeerDto;
+import guru.springframework.web.model.BeerPageList;
 import guru.springframework.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +15,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor

@@ -1,7 +1,7 @@
 package guru.springframework.msscbrewrey.services;
 
-import guru.springframework.msscbrewrey.web.model.BeerPageList;
 import guru.springframework.web.model.BeerDto;
+import guru.springframework.web.model.BeerPageList;
 import guru.springframework.web.model.BeerStyleEnum;
 import org.springframework.data.domain.PageRequest;
 
