@@ -1,10 +1,9 @@
 package guru.springframework.msscbrewrey.services.inventory;
 
 import guru.springframework.msscbrewrey.config.BreweryConfig;
-import guru.springframework.msscbrewrey.services.inventory.model.BeerInventoryDto;
+import guru.springframework.web.model.BeerInventoryDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;

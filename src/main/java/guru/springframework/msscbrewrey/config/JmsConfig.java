@@ -12,6 +12,8 @@ public class JmsConfig {
 
     public static final String BREWING_REQUEST_Q = "brewing-request-q";
     public static final String NEW_INVENTORY_Q = "new-inventory-q";
+    public static final String VALIDATE_BEER_ORDER ="validate_order_q";
+    public static final String VALIDATE_ORDER_RESULT = "validate-order-result";
 
     @Bean  // use spring managed object mapper to resolve date format issue
     public MessageConverter messageConverter(ObjectMapper mapper) {
